@@ -1,21 +1,23 @@
 import './App.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+
+  const [text, setText] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://127.0.0.1:5000/test');
+      const json = await response.json();
+      setText(json.message);
+    }
+
+    fetchData();
+  },[]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{text}</h1>
     </div>
   );
 }
