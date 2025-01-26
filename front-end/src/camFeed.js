@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef, use } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from "socket.io-client";
+import axios from 'axios';
 
-function CamFeed({ socket, camVisible, setMood, toggleCamera }) {
+function CamFeed({ socket, camVisible, setMood, toggleCamera, setSongsList, mood }) {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [cameraOn, setCameraOn] = useState(false);
@@ -38,6 +39,23 @@ function CamFeed({ socket, camVisible, setMood, toggleCamera }) {
       socket.current.emit('send_frame', { image: base64Image});
     };
 
+    const getSongs = async () => { // get song recommendations based on the detected mood
+      const text = mood;
+      try {
+          const response = await axios.post('http://localhost:5000/chat', { text }, {
+            headers: {
+              'Content-Type': 'application/json'  // ensure the content type is set correctly
+            } 
+          });
+
+        const songsList = response.data.songs.data.searchV2.tracksV2.items;
+        setSongsList(songsList);
+      
+      } catch (error) {
+          console.error(error);
+      }
+    };
+
     useEffect(() => { // start the camera feed and set up the WebSocket connection when the component mounts
       if (camVisible) {
         startLiveCamera();
@@ -58,6 +76,7 @@ function CamFeed({ socket, camVisible, setMood, toggleCamera }) {
           clearInterval(interval);
           setCameraOn(false);
           toggleCamera();
+          getSongs();
         }, 5000);
 
         return () => {

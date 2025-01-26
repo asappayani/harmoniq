@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import CamButton from './CamButton.js';
 import { FaArrowUp } from "react-icons/fa";
 
-function ChatBox({ toggleCamera, setMood }) {
+function ChatBox({ toggleCamera, setMood, setSongsList }) {
     const [text, setText] = useState(); // state of the input field
 
     const handleInputChange = (e) => { // update the state of the input field whenever its typed in
@@ -20,6 +20,9 @@ function ChatBox({ toggleCamera, setMood }) {
                   }
             });
             const detectedEmotion = response.data.emotion;
+            const songsList = response.data.songs.data.searchV2.tracksV2.items;
+            setSongsList(songsList);
+        
             setMood(detectedEmotion);
             setText('');
 

@@ -1,7 +1,26 @@
+/* Global Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Disable scrolling */
+}
+
+/* Ensuring that the App container fills the screen and doesn't cause scrolling */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Prevent scrolling within the app */
+}
+
 body {
-  margin: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #121212; 
@@ -23,6 +42,24 @@ h1, p, div, button {
   transition: all 0.3s ease-in-out;
 }
 
+/* Existing styles */
+.Emotion {
+  transition: all 0.5s ease-out; /* Smooth transition */
+  margin-top: 20px; /* Normal margin */
+}
+
+h1.Emotion {
+  text-align: center; /* Center the text */
+  width: 100%; /* Ensure the header takes up full width */
+}
+
+/* Animation to move the text up when the camera feed is visible */
+.Emotion.move-up {
+  transform: translateY(-250px); /* Move up by 50px */
+  opacity: 0.7; /* Optional: fade the text slightly */
+}
+
+/* ChatBox */
 .ChatBox {
   width: 100%;
   max-width: 600px; 
@@ -38,6 +75,7 @@ h1, p, div, button {
   z-index: 100; 
 }
 
+/* Input and Submit Button */
 .input-button-wrapper {
   display: flex;  
   align-items: center; 
@@ -46,81 +84,74 @@ h1, p, div, button {
   flex-wrap: wrap; 
 }
 
-/* Style for the input field */
 input[type="text"] {
-  flex: 1; /* Take up remaining space */
+  flex: 1;
   padding: 12px 20px;
   font-size: 16px;
-  border: 1px solid #333; /* Dark border */
+  border: 1px solid #333;
   border-radius: 8px;
-  box-sizing: border-box;
-  background-color: #2b2b2b; /* Slightly lighter than background */
-  color: #e0e0e0; /* Light text color */
+  background-color: #2b2b2b;
+  color: #e0e0e0; 
 }
 
 input[type="text"]::placeholder {
-  color: #888; /* Subtle placeholder color */
+  color: #888;
 }
 
 input[type="text"]:focus {
-  border-color: #ffffff; /* Accent color for focus */
+  border-color: #ffffff;
   outline: none;
 }
 
-/* Style for the submit button */
 button[type="submit"] {
   padding: 12px 16px;
   font-size: 16px;
-  background-color: #ffffff; /* Accent color for the button */
+  background-color: #ffffff;
   color: white;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  white-space: nowrap;
   transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #2f7ee4; /* Slightly darker green */
+  background-color: #2f7ee4;
 }
 
-.CamButton button {
-  padding: 12px 16px; 
-  font-size: 16px; 
-  background-color: #3e3f3e; /* Accent color */
-  color: white;
-  border: none;
-  border-radius: 12px; 
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.3s ease;
-}
-
-.CamButton button:hover {
-  background-color: #ff0000; 
-}
-
-.App {
-  text-align: center;
-  flex-grow: 1;
-}
 
 .cameraBox {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease; 
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Add transition for smoothness */
 }
 
 .cameraBox--visible {
   opacity: 1; /* Show the camera box */
   pointer-events: auto; /* Enable interaction */
-  transform: translate(-50%, -50%) scale(1.1); /* Slight zoom effect for cleaner appearance */
+  transform: translate(-50%, -50%) scale(1.1); /* Keep centered, slightly zoomed in */
 }
+
+/* Styling for the camera feed */
+.cameraFeed {
+  width: 400px; /* Size of the camera feed */
+  height: 300px; /* Adjust height */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  border: 2px solid #333; /* Subtle border */
+  transform: scaleX(-1); /* Invert horizontally */
+}
+
+/* When camera feed is hidden, it fades out */
+.cameraFeed.hidden {
+  opacity: 0;
+  transform: scaleX(-1) scale(0.9); /* Shrink slightly for a fade-out effect */
+}
+
 
 .cameraBox--visible::before {
   content: '';
@@ -133,26 +164,124 @@ button[type="submit"]:hover {
   border-radius: 8px;
 }
 
-/* Styling for the camera feed */
 .cameraFeed {
-  width: 400px; /* Increase the size */
-  height: 300px; /* Adjust for height */
-  border-radius: 8px; /* Rounded corners for a softer look */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
-  border: 2px solid #333; /* Subtle border for neatness */
-  transform: scaleX(-1); /* Keep the camera feed inverted */
+  width: 400px; /* Set the size of the camera feed */
+  height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  border: 2px solid #333;
+  transform: scaleX(-1); /* Flip the camera feed */
 }
 
-/* When camera feed is hidden, it fades out */
-.cameraFeed.hidden {
-  opacity: 0;
-  transform: scaleX(-1) scale(0.9); /* Optional: shrink slightly */
-}
-
-/* Hiding canvas for processing frames */
 .cameraCanvas {
   width: 400px;
   height: 300px;
-  display: none; /* Hide canvas */
+  display: block; /* Ensure canvas is shown */
+  position: absolute; /* Keep canvas in the same place as the camera feed */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Put canvas behind the camera feed */
 }
 
+button[type="submit"], .CamButton button {
+  padding: 12px 16px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex; /* Align the icon properly */
+  justify-content: center; /* Center the icon */
+  align-items: center; /* Center the icon */
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  min-width: 15px; /* Ensure both buttons have the same minimum width */
+  height: 50px; /* Ensure both buttons have the same height */
+}
+
+button[type="submit"]:hover, .CamButton button:hover {
+  background-color: #ff0000; /* Accent hover color */
+}
+
+.CamButton button {
+  background-color: #333; 
+}
+
+.CamButton button .react-icon { 
+  font-size: 24px; /* Set the size of the React Icon */
+}
+
+
+.CamButton button:hover {
+  background-color: #ff0000; /* Accent hover color */
+}
+
+/* Song List */
+.song-list {
+  display: flex;
+  justify-content: center; /* Center the items horizontally */
+  align-items: center; /* Center the items vertically */
+  gap: 20px; /* Space between the song items */
+  margin-top: 20px;
+  flex-wrap: wrap; /* Allow the items to wrap onto the next line if necessary */
+  width: 100%; /* Ensure the list spans the full width of the container */
+  padding: 0 10px; /* Optional: Add padding for spacing */
+  max-width: 100%; /* Ensure the width doesn't exceed screen space */
+  box-sizing: border-box; /* Ensure padding doesn't affect the width */
+  display: flex;
+  flex-wrap: wrap; /* Items will move to the next line if needed */
+  justify-content: center; /* Center the song items horizontally */
+  opacity: 1; /* Default visibility */
+  transition: opacity 0.5s ease; /* Smooth transition for fading */
+}
+
+.song-list.hidden {
+  opacity: 0; /* Fade out when hidden */
+}
+
+.song-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); 
+  width: 200px; /* Fixed width for uniformity */
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-sizing: border-box; /* Ensures padding doesn't affect the width */
+  margin: 0 10px; /* Adds space between items */
+}
+
+.song-item:hover {
+  transform: translateY(-5px); /* Elevate the card slightly on hover */
+}
+
+
+.album-cover {
+  width: 120px;
+  height: 120px;
+  object-fit: cover; /* Ensures image fits within the circle */
+  border-radius: 10px; /* Round corners for the image */
+  margin-bottom: 10px;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.song-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #fff; /* Light text color for the song name */
+}
+
+.artist-name {
+  font-style: italic;
+  color: #bbb; /* Slightly lighter color for artist name */
+  font-size: 0.9rem;
+}

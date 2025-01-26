@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { FaCamera } from "react-icons/fa";
 
 function CamButton({ toggleCamera }) {
