@@ -13,7 +13,7 @@ def preprocess_frame(data):
 
 def analyze_frame(data):
     image = preprocess_frame(data)
-    analysis = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
+    analysis = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False, detector_backend='opencv')
 
     detected_emotion = analysis[0]['dominant_emotion']
 
