@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  text-align: center;
+}
+
+.cameraBox {
+  padding-top: 50px;
+}
+
+.cameraFeed {
+  border: '1px solid black';
+  width: '320px';
+  height: '240px';
+  transform: scaleX(-1);
+}
+
+.cameraCanvas{
+  width: '320px';
+  height: '240px';
+  display: none;
+}
