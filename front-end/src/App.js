@@ -19,6 +19,12 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setMood("happy, maybe");
+    }, 5000); 
+  }, []);
+
   const toggleCamera = () => {
     if (camVisible) {
       setCamVisible(false);
@@ -30,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className={`Emotion ${camVisible ? 'move-up' : ''}`}>Today, you're feeling{mood ? ` ${mood}!` : "..."}</h1>
+      <h1 className={`Emotion ${camVisible ? 'move-up' : ''}`}>{mood ? `Today, you are feeling ${mood}?` : "Welcome to Harmoniq."}</h1>
       <CamFeed socket={socketRef} camVisible={camVisible} setMood={setMood} toggleCamera={toggleCamera} setSongsList={setSongsList} mood={mood}/>
       <ChatBox toggleCamera={toggleCamera} setMood={setMood} setSongsList={setSongsList} />
       {!camVisible && songsList.length > 0 && <SongList data={songsList} />}
