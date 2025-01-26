@@ -1,9 +1,7 @@
 # Emotion-Based Music Recommendation App
 
 ## Overview
-This application is a hackathon project submitted for TAMUHack 2025. This project uses **facial expressions** and **text-based mood inputs** to recommend music that matches the user's emotional state. It combines AI-powered emotion detection with music recommendations from the Spotify API.
-
-If you'd like to see a demo, visit https://devpost.com/software/blah-9fw307?ref_content=my-projects-tab&ref_feature=my_projects
+This application is a 24-hour hackathon project submitted for TAMUHack 2025. This project uses **facial expressions** and **text-based mood inputs** to recommend music that matches the user's emotional state. It combines AI-powered emotion detection with music recommendations from the Spotify API.
 
 ---
 
@@ -17,7 +15,6 @@ If you'd like to see a demo, visit https://devpost.com/software/blah-9fw307?ref_
 
 3. **Spotify Music Recommendation**:
    - Recommends songs based on the user's mood using the Spotify API.
-   - Leverages mood-related attributes like **valence** and **arousal** to fetch relevant tracks.
 
 ---
 
@@ -27,8 +24,8 @@ If you'd like to see a demo, visit https://devpost.com/software/blah-9fw307?ref_
      - An input box for typing how you feel.
      - A camera button to analyze mood via facial expressions.
    - Sends mood data to the backend for analysis.
-     
-![image](https://github.com/user-attachments/assets/3781b33d-4a2a-4298-b8b7-b6a0227fa56b)
+
+![image](https://github.com/user-attachments/assets/c557a36d-ce5a-43b3-90b0-ce65b9f45838)
 
 2. **Backend**:
    - Powered by **Flask** with the following features:
@@ -39,7 +36,7 @@ If you'd like to see a demo, visit https://devpost.com/software/blah-9fw307?ref_
 
 3. **Spotify Integration**:
    - The user is authenticated via Spotify’s OAuth flow.
-   - Recommends music based on the detected emotion and its corresponding **valence** and **arousal** values.
+   - Recommends music based on the detected emotion.
 
 ---
 
@@ -55,3 +52,66 @@ If you'd like to see a demo, visit https://devpost.com/software/blah-9fw307?ref_
    ```bash
    git clone https://github.com/your-repo/emotion-music-recommendation.git
    cd emotion-music-recommendation
+   ```
+
+2. **Backend Setup**:
+   - Install Python dependencies:
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - Set up environment variables in a `.env` file:
+     ```env
+     CLIENT_ID=<your_spotify_client_id>
+     CLIENT_SECRET=<your_spotify_client_secret>
+     REDIRECT_URI=http://localhost:5000/callback
+     ```
+   - Run the Flask server:
+     ```bash
+     python app.py
+     ```
+
+3. **Frontend Setup**:
+   - Navigate to the `frontend` directory:
+     ```bash
+     cd frontend
+     ```
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the development server:
+     ```bash
+     npm start
+     ```
+
+---
+
+## Usage
+1. Open the application in your browser at `http://localhost:3000`.
+2. Log in to Spotify to authenticate.
+3. Use the input box or camera button to share your mood.
+4. View song recommendations based on your detected emotion.
+
+---
+
+## Technologies Used
+- **Frontend**: React
+- **Backend**: Flask, Flask-SocketIO
+- **APIs**:
+  - Spotify API for music recommendations.
+  - Hugging Face Transformers for text-based emotion detection.
+  - DeepFace for facial emotion analysis.
+
+---
+
+## Future Plans
+- Reintroduce valence and arousal numbers for more precise song recommendations.
+- Incorporate user preferences for better recommendations.
+- Add support for other music APIs like Last.fm or Musixmatch.
+- Enhance UI with additional features like playlist saving.
+
+---
+
+## License
+This project is licensed under the MIT License.
+
