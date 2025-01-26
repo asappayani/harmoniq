@@ -1,7 +1,9 @@
 # Emotion-Based Music Recommendation App
 
 ## Overview
-This application uses **facial expressions** and **text-based mood inputs** to recommend music that matches the user's emotional state. It combines AI-powered emotion detection with music recommendations from the Spotify API.
+This application is a hackathon project submitted for TAMUHack 2025. This project uses **facial expressions** and **text-based mood inputs** to recommend music that matches the user's emotional state. It combines AI-powered emotion detection with music recommendations from the Spotify API.
+
+If you'd like to see a demo, visit https://devpost.com/software/blah-9fw307?ref_content=my-projects-tab&ref_feature=my_projects
 
 ---
 
@@ -25,6 +27,8 @@ This application uses **facial expressions** and **text-based mood inputs** to r
      - An input box for typing how you feel.
      - A camera button to analyze mood via facial expressions.
    - Sends mood data to the backend for analysis.
+     
+![image](https://github.com/user-attachments/assets/3781b33d-4a2a-4298-b8b7-b6a0227fa56b)
 
 2. **Backend**:
    - Powered by **Flask** with the following features:
