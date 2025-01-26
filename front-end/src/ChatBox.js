@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import CamButton from './CamButton.js';
+import { FaArrowUp } from "react-icons/fa";
 
-function ChatBox({toggleCamera}) {
-    const [text, setText] = useState('not locked in'); // state of the input field
+function ChatBox({ toggleCamera, setMood }) {
+    const [text, setText] = useState(); // state of the input field
 
     const handleInputChange = (e) => { // update the state of the input field whenever its typed in
         setText(e.target.value);
@@ -13,7 +14,13 @@ function ChatBox({toggleCamera}) {
         e.preventDefault();
 
         try {
-            await axios.post('http://localhost:5000/chat', {text});
+            const response = await axios.post('http://localhost:5000/chat', { text }, {
+                headers: {
+                  'Content-Type': 'application/json'  // ensure the content type is set correctly
+                  }
+            });
+            const detectedEmotion = response.data.emotion;
+            setMood(detectedEmotion);
             setText('');
 
         } catch (error) {
@@ -22,15 +29,21 @@ function ChatBox({toggleCamera}) {
     }
 
   return (
-    <div>
+    <div className="ChatBox">
         <form onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                value={text}
-                onChange={handleInputChange}
-                placeholder="How're you feeling today?" />
+            <div className='input-button-wrapper'>
+                <input 
+                    type="text"
+                    value={text}
+                    onChange={handleInputChange}
+                    placeholder="How're you feeling today?" />
+                <button type="submit">
+                    <FaArrowUp style={{color: 'black'}}/>
+                </button>
+                <CamButton toggleCamera={toggleCamera}/>
+            </div>
         </form>
-        <CamButton toggleCamera={toggleCamera}/>
+ 
     </div>
   );
 }

@@ -1,34 +1,158 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  margin: 0; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #121212; 
+  color: #e0e0e0; 
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh; 
+  opacity: 0;
+  animation: fadeIn 1.5s forwards ease-out; 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+h1, p, div, button {
+  transition: all 0.3s ease-in-out;
+}
+
+.ChatBox {
+  width: 100%;
+  max-width: 600px; 
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e; 
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
+  position: fixed;
+  bottom: 20px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  z-index: 100; 
+}
+
+.input-button-wrapper {
+  display: flex;  
+  align-items: center; 
+  width: 100%;
+  gap: 10px; 
+  flex-wrap: wrap; 
+}
+
+/* Style for the input field */
+input[type="text"] {
+  flex: 1; /* Take up remaining space */
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #333; /* Dark border */
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #2b2b2b; /* Slightly lighter than background */
+  color: #e0e0e0; /* Light text color */
+}
+
+input[type="text"]::placeholder {
+  color: #888; /* Subtle placeholder color */
+}
+
+input[type="text"]:focus {
+  border-color: #ffffff; /* Accent color for focus */
+  outline: none;
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+  padding: 12px 16px;
+  font-size: 16px;
+  background-color: #ffffff; /* Accent color for the button */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #2f7ee4; /* Slightly darker green */
+}
+
+.CamButton button {
+  padding: 12px 16px; 
+  font-size: 16px; 
+  background-color: #3e3f3e; /* Accent color */
+  color: white;
+  border: none;
+  border-radius: 12px; 
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.CamButton button:hover {
+  background-color: #ff0000; 
 }
 
 .App {
   text-align: center;
+  flex-grow: 1;
 }
 
 .cameraBox {
-  padding-top: 50px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease; 
 }
 
+.cameraBox--visible {
+  opacity: 1; /* Show the camera box */
+  pointer-events: auto; /* Enable interaction */
+  transform: translate(-50%, -50%) scale(1.1); /* Slight zoom effect for cleaner appearance */
+}
+
+.cameraBox--visible::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+/* Styling for the camera feed */
 .cameraFeed {
-  border: '1px solid black';
-  width: '320px';
-  height: '240px';
-  transform: scaleX(-1);
+  width: 400px; /* Increase the size */
+  height: 300px; /* Adjust for height */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+  border: 2px solid #333; /* Subtle border for neatness */
+  transform: scaleX(-1); /* Keep the camera feed inverted */
 }
 
-.cameraCanvas{
-  width: '320px';
-  height: '240px';
-  display: none;
+/* When camera feed is hidden, it fades out */
+.cameraFeed.hidden {
+  opacity: 0;
+  transform: scaleX(-1) scale(0.9); /* Optional: shrink slightly */
 }
+
+/* Hiding canvas for processing frames */
+.cameraCanvas {
+  width: 400px;
+  height: 300px;
+  display: none; /* Hide canvas */
+}
+

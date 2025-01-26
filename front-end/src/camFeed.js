@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, use } from 'react';
 import io from "socket.io-client";
 
-function CamFeed({ socket, camVisible, setMood }) {
+function CamFeed({ socket, camVisible, setMood, toggleCamera }) {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [cameraOn, setCameraOn] = useState(false);
 
-    const startLiveCamera = async () => { // Start the camera feed
+    const startLiveCamera = async () => { // start the camera feed
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ video: true });
           if (videoRef.current) {
@@ -17,18 +17,18 @@ function CamFeed({ socket, camVisible, setMood }) {
         }
       };
 
-    const stopLiveCamera = () => { // Stop the camera feed
+    const stopLiveCamera = () => { // stop the camera feed
       if (videoRef.current) {
         const stream = videoRef.current.srcObject;
         if (stream) {
           const tracks = stream.getTracks();
           tracks.forEach(track => track.stop());
-          videoRef.current.srcObject = null;  // Disconnect the video feed
+          videoRef.current.srcObject = null;  // disconnect the video feed
         }
       }
     };
 
-    const captureFrame = () => { // Capture a frame from the camera feed and send it to the backend for emotion detection
+    const captureFrame = () => { // capture a frame from the camera feed and send it to the backend for emotion detection
       const video = videoRef.current;
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
@@ -38,7 +38,7 @@ function CamFeed({ socket, camVisible, setMood }) {
       socket.current.emit('send_frame', { image: base64Image});
     };
 
-    useEffect(() => { // Start the camera feed and set up the WebSocket connection when the component mounts
+    useEffect(() => { // start the camera feed and set up the WebSocket connection when the component mounts
       if (camVisible) {
         startLiveCamera();
         setCameraOn(true);
@@ -54,9 +54,10 @@ function CamFeed({ socket, camVisible, setMood }) {
 
         const timeoutId = setTimeout(() => {
           stopLiveCamera();
-          setCameraOn(false);
           socket.current.disconnect();
           clearInterval(interval);
+          setCameraOn(false);
+          toggleCamera();
         }, 5000);
 
         return () => {
@@ -71,7 +72,7 @@ function CamFeed({ socket, camVisible, setMood }) {
     }, [socket, camVisible, setMood]);
 
     return ( // Display the camera feed
-        <div className="cameraBox">
+        <div className={`cameraBox ${cameraOn ? 'cameraBox--visible' : ''}`}>
           {cameraOn && (
             <>
               <video className="cameraFeed" ref={videoRef} autoPlay playsInline></video>

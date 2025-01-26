@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { FaCamera } from "react-icons/fa";
 
 function CamButton({ toggleCamera }) {
     return (
-        <div>
-            <button onClick={toggleCamera}>📷</button>
+        <div className='CamButton'>
+            <button onClick={toggleCamera}>
+                <FaCamera />
+            </button>
         </div>
     );
 }

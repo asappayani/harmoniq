@@ -19,14 +19,19 @@ function App() {
   }, []);
 
   const toggleCamera = () => {
-    setCamVisible(prevState => !prevState);
+    if (camVisible) {
+      setCamVisible(false);
+    } else {
+      setCamVisible(true);
+    }
+
   };
 
   return (
     <div className="App">
-      <CamFeed socket={socketRef} camVisible={camVisible} setMood={setMood} />
-      <h1>{mood}</h1>
-      <ChatBox toggleCamera={toggleCamera}/>
+      <h1 className='Emotion'>Today, you're feeling{mood ? ` ${mood}!` : "..."}</h1>
+      <CamFeed socket={socketRef} camVisible={camVisible} setMood={setMood} toggleCamera={toggleCamera}/>
+      <ChatBox toggleCamera={toggleCamera} setMood={setMood} />
     </div>
   );
 }
