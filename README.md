@@ -3,6 +3,7 @@
 ## Overview
 This application is a 24-hour hackathon project submitted for TAMUHack 2025. This project uses **facial expressions** and **text-based mood inputs** to recommend music that matches the user's emotional state. It combines AI-powered emotion detection with music recommendations from the Spotify API.
 
+## Demo https://devpost.com/software/blah-9fw307?ref_content=my-projects-tab&ref_feature=my_projects
 ---
 
 ## Features
