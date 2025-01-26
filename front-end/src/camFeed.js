@@ -68,7 +68,7 @@ function CamFeed({ socket, camVisible, setMood, toggleCamera, setSongsList, mood
 
         const interval = setInterval(() => {
           captureFrame();
-        }, 500);
+        }, 550);
 
         const timeoutId = setTimeout(() => {
           stopLiveCamera();

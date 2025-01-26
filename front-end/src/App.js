@@ -1,6 +1,7 @@
 import CamFeed from './CamFeed';
 import ChatBox from './ChatBox';
 import SongList from './SongList';
+import logo from './logo.png';
 import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      setMood("happy, maybe");
+      setMood("something...");
     }, 5000); 
   }, []);
 
@@ -36,7 +37,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className={`Emotion ${camVisible ? 'move-up' : ''}`}>{mood ? `Today, you are feeling ${mood}?` : "Welcome to Harmoniq."}</h1>
+      <div className="logo">
+        <img src={logo}/>
+      </div>
+
+      <h1 className={`Emotion ${camVisible ? 'move-up' : ''}`}>{mood ? `Today, you are feeling ${mood}` : "Welcome to Harmoniq."}</h1>
       <CamFeed socket={socketRef} camVisible={camVisible} setMood={setMood} toggleCamera={toggleCamera} setSongsList={setSongsList} mood={mood}/>
       <ChatBox toggleCamera={toggleCamera} setMood={setMood} setSongsList={setSongsList} />
       {!camVisible && songsList.length > 0 && <SongList data={songsList} />}

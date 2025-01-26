@@ -176,11 +176,11 @@ button[type="submit"]:hover {
 .cameraCanvas {
   width: 400px;
   height: 300px;
-  display: block; /* Ensure canvas is shown */
+  display: none; /* Ensure canvas is shown */
   position: absolute; /* Keep canvas in the same place as the camera feed */
   top: 0;
   left: 0;
-  z-index: -1; /* Put canvas behind the camera feed */
+  z-index: 1; /* Put canvas behind the camera feed */
 }
 
 button[type="submit"], .CamButton button {
@@ -200,7 +200,7 @@ button[type="submit"], .CamButton button {
 }
 
 button[type="submit"]:hover, .CamButton button:hover {
-  background-color: #ff0000; /* Accent hover color */
+  background-color: #6776ff; /* Accent hover color */
 }
 
 .CamButton button {
@@ -284,4 +284,23 @@ button[type="submit"]:hover, .CamButton button:hover {
   font-style: italic;
   color: #bbb; /* Slightly lighter color for artist name */
   font-size: 0.9rem;
+}
+
+.logo {
+  position: fixed; /* Keep it in a fixed position */
+  top: 10px; /* Adjust the distance from the top */
+  left: 10px; /* Adjust the distance from the left */
+  z-index: 100; /* Ensure it stays above other elements */
+}
+
+.logo img {
+  width: 40px; /* Set the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  cursor: pointer; /* Optional: Add a pointer cursor for interactivity */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  border-radius: 50px;
+}
+
+.logo img:hover {
+  transform: scale(1.1); /* Slightly enlarge the logo on hover */
 }

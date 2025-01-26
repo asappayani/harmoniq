@@ -29,7 +29,7 @@ sp_oauth = SpotifyOAuth(client_id=CLIENT_ID,
                         scope=SCOPES)
 
 def get_songs_for_mood(emotion):
-    if emotion == "anger" or emotion == "anger":
+    if emotion == "anger" or emotion == "angry":
         query = "genre:rock"
     elif emotion == "disgust":
         query = "genre:funk"
@@ -62,16 +62,16 @@ def login():
 
 @app.route('/callback')
 def callback():
-    # Get the authorization code from the URL
+    # get auth code from url
     auth_code = request.args.get('code')
     
-    # Use the authorization code to get the access token
+    # get the access token
     token_info = sp_oauth.get_access_token(auth_code)
     
-    # Store the token info in session
+    # store the token info in session for later use
     session['token_info'] = token_info
     
-    # Send the access token and refresh token as a JSON response to React frontend
+    # send the access token and refresh token as a JSON response to React frontend
     access_token = token_info['access_token']
     refresh_token = token_info['refresh_token']
     
