@@ -7,6 +7,8 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotapi import Song
 from faceAnalysis import analyze_frame
 from textAnalysis import analyze_text
+from pprint import pprint as pp
+import random
 
 
 app = Flask(__name__)
@@ -31,22 +33,31 @@ sp_oauth = SpotifyOAuth(client_id=CLIENT_ID,
 def get_songs_for_mood(emotion):
     if emotion == "anger" or emotion == "angry":
         query = "genre:rock"
+
     elif emotion == "disgust":
         query = "genre:funk"
+
     elif emotion == "fear":
         query = "genre:metal"
+
     elif emotion == "joy" or emotion == "happy":
         query = "genre:pop"
+
     elif emotion == "neutral":
-        query = "genre:instrumental" # neutral
+        query = "genre:instrumental"
+
     elif emotion == "sadness" or emotion == "sad":
         query = "genre:jazz"
+
     elif emotion == "surprise":
         query = "genre:electronic"
+
     else:
         query = "genre:pop"
 
     return query
+
+### Spotify Authorization
 
 @app.route('/')
 def index():
@@ -95,6 +106,8 @@ def refresh_token():
     
     return jsonify(new_token_info)
 
+### Chat and Emotion Detection
+
 @app.route('/chat', methods=['POST']) # receives the chats from front-end
 def chat():
     try:
@@ -103,10 +116,11 @@ def chat():
         emotion = analyze_text(message)
         song = Song()
 
-        songs = song.query_songs(get_songs_for_mood(emotion), limit=5)
+        songs = song.query_songs(get_songs_for_mood(emotion), limit=100)
         data = songs["data"]["searchV2"]["tracksV2"]["items"]
+        random.shuffle(data) #double shuffle to get random songs
 
-        return jsonify({"success": True, "emotion": emotion, "songs": songs}), 200
+        return jsonify({"success": True, "emotion": emotion, "songs": data[:7]}), 200
     except Exception as e:
         return jsonify({"success": False, "message": f"Error analyzing text: {str(e)}"}), 400
 
@@ -119,11 +133,16 @@ def handleFrame(data):
         print("Error analyzing frame")
         socketio.emit('emotion_detected', {'emotion': 'error'})
 
-@socketio.on('disconnect')
-def handleDisconnect():
-    print('Client disconnected')
-
 
 if __name__ == "__main__":
 
-    socketio.run(app, debug=True)
+   socketio.run(app, debug=True)
+
+    # song = Song()
+
+    # songs = song.query_songs(get_songs_for_mood("happy"), limit=100)
+    # data = songs["data"]["searchV2"]["tracksV2"]["items"]
+
+    # random.shuffle(data)
+
+    # pp(data)
