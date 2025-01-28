@@ -49,7 +49,7 @@ function CamFeed({ socket, camVisible, setMood, toggleCamera, setSongsList, mood
             } 
           });
 
-        const songsList = response.data.songs.data.searchV2.tracksV2.items;
+        const songsList = response.data.songs;
         setSongsList(songsList);
       
       } catch (error) {

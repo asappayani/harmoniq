@@ -21,7 +21,7 @@ function ChatBox({ toggleCamera, setMood, setSongsList }) {
                   }
             });
             const detectedEmotion = response.data.emotion;
-            const songsList = response.data.songs.data.searchV2.tracksV2.items;
+            const songsList = response.data.songs;
             setSongsList(songsList);
         
             setMood(detectedEmotion);
