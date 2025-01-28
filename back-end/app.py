@@ -81,7 +81,8 @@ def callback():
    
 @app.route('/refresh_token', methods=['POST'])
 def refresh_token():
-    # Refresh the access token using the refresh token
+
+    # refresh the access token using the refresh token
     token_info = session.get('token_info')
     if not token_info:
         return jsonify({"error": "No token info found"}), 400
@@ -89,7 +90,7 @@ def refresh_token():
     refresh_token = token_info['refresh_token']
     new_token_info = sp_oauth.refresh_access_token(refresh_token)
     
-    # Store the new token in session
+    # xtore the new token in session
     session['token_info'] = new_token_info
     
     return jsonify(new_token_info)
@@ -126,9 +127,3 @@ def handleDisconnect():
 if __name__ == "__main__":
 
     socketio.run(app, debug=True)
-    """
-    song = Song()
-    song = song.query_songs("genre:rock", limit=5)
-
-    pprint.pprint(song)
-    """

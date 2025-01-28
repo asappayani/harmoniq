@@ -1,0 +1,32 @@
+button[type="submit"], .CamButton button {
+    padding: 12px 16px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex; /* Align the icon properly */
+    justify-content: center; /* Center the icon */
+    align-items: center; /* Center the icon */
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+    min-width: 15px; /* Ensure both buttons have the same minimum width */
+    height: 50px; /* Ensure both buttons have the same height */
+  }
+  
+  button[type="submit"]:hover, .CamButton button:hover {
+    background-color: #6776ff; /* Accent hover color */
+  }
+  
+  .CamButton button {
+    background-color: #333; 
+  }
+  
+  .CamButton button .react-icon { 
+    font-size: 24px; /* Set the size of the React Icon */
+  }
+  
+  
+  .CamButton button:hover {
+    background-color: #ff0000; /* Accent hover color */
+  }

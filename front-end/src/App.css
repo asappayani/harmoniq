@@ -1,0 +1,44 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo {
+    position: fixed; 
+    top: 10px;
+    left: 10px; 
+    z-index: 100; 
+  }
+  
+  .logo img {
+    width: 40px; 
+    height: auto; 
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+    border-radius: 50px;
+  }
+  
+  .logo img:hover {
+    transform: scale(1.1); 
+  }
+
+  .Emotion {
+    transition: all 0.5s ease-out; /* Smooth transition */
+    margin-top: 20px; /* Normal margin */
+  }
+  
+  h1.Emotion {
+    text-align: center; /* Center the text */
+    width: 100%; /* Ensure the header takes up full width */
+  }
+  
+  /* Animation to move the text up when the camera feed is visible */
+  .Emotion.move-up {
+    transform: translateY(-250px); /* Move up by 50px */
+    opacity: 0.7; /* Optional: fade the text slightly */
+  }

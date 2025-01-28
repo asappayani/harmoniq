@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import CamButton from './CamButton.js';
+import './ChatBox.css';
 import { FaArrowUp } from "react-icons/fa";
 
 function ChatBox({ toggleCamera, setMood, setSongsList }) {
@@ -16,7 +17,7 @@ function ChatBox({ toggleCamera, setMood, setSongsList }) {
         try {
             const response = await axios.post('http://localhost:5000/chat', { text }, {
                 headers: {
-                  'Content-Type': 'application/json'  // ensure the content type is set correctly
+                  'Content-Type': 'application/json'
                   }
             });
             const detectedEmotion = response.data.emotion;

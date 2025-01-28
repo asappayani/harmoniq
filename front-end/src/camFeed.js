@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from "socket.io-client";
 import axios from 'axios';
+import './CamFeed.css';
 
 function CamFeed({ socket, camVisible, setMood, toggleCamera, setSongsList, mood }) {
     const videoRef = useRef(null);

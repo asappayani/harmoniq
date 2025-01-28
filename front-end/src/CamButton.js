@@ -1,4 +1,5 @@
 import { FaCamera } from "react-icons/fa";
+import './CamButton.css';
 
 function CamButton({ toggleCamera }) {
     return (

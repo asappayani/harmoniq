@@ -2,6 +2,7 @@ import CamFeed from './CamFeed';
 import ChatBox from './ChatBox';
 import SongList from './SongList';
 import logo from './logo.png';
+import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 
 function App() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import './SongList.css';
 
 // SongList Component
 const SongList = ({ data }) => {
