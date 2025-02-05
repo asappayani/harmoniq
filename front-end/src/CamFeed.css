@@ -55,9 +55,10 @@
   .cameraCanvas {
     width: 400px;
     height: 300px;
-    display: none; /* Ensure canvas is shown */
+    display: none;  /*Ensure canvas is shown */
     position: absolute; /* Keep canvas in the same place as the camera feed */
     top: 0;
     left: 0;
     z-index: 1; /* Put canvas behind the camera feed */
+    transform: scaleX(-1);
   }
